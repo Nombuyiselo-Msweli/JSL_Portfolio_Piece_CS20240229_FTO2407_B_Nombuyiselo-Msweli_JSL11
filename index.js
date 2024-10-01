@@ -84,7 +84,7 @@ function displayBoards(boards) {
 }
 
 // Filters tasks corresponding to the board name and displays them on the DOM.
-// TASK: Fix Bugs
+// TASK: Fix Bugs === DONE ===
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
   const filteredTasks = tasks.filter(task => task.board = boardName);
@@ -126,7 +126,7 @@ function refreshTasksUI() {
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').foreach(btn => { 
+  document.querySelectorAll('.board-btn').forEach(btn => { 
     
     if(btn.textContent === boardName) {
       btn.add('active') 
