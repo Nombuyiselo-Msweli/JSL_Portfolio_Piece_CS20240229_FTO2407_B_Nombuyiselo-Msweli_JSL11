@@ -26,8 +26,16 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-      headerBoardName : document.getElementById("header-board-name"),
+      headerBoardName : document.getElementById('header-board-name'),
+      editTaskModal: document.querySelector('.edit-task-modal-window'),
+      filterDiv : document.getElementById('filterDiv'),
+      hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
+      showSideBarBtn: document.getElementById('show-side-bar-btn') , 
+      themeSwitch: document.getElementById('switch') ,
+      createNewTaskBtn: document.getElementById('add-new-task-btn')
+      
 }
+// NOTE FOR MYSELF: using elements.variablename to see what to add to the elements object and ensure they are initialised.
 
 let activeBoard = ""
 
@@ -69,7 +77,7 @@ function displayBoards(boards) {
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
       styleActiveBoard(activeBoard)
     });
-    
+
     boardsContainer.appendChild(boardElement);
   });
 
