@@ -32,8 +32,8 @@ const elements = {
       hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
       showSideBarBtn: document.getElementById('show-side-bar-btn') , 
       themeSwitch: document.getElementById('switch') ,
-      createNewTaskBtn: document.getElementById('add-new-task-btn')
-      
+      createNewTaskBtn: document.getElementById('add-new-task-btn'),
+      columnDivs: document.querySelectorAll('.column-div')
 }
 // NOTE FOR MYSELF: using elements.variablename to see what to add to the elements object and ensure they are initialised.
 
@@ -61,7 +61,7 @@ function fetchAndDisplayBoardsAndTasks() {
 }
 
 // Creates different boards in the DOM
-// TASK: Fix Bugs
+// TASK: Fix Bugs ==== DONE =====
 function displayBoards(boards) {
   const boardsContainer = document.getElementById("boards-nav-links-div");
   boardsContainer.innerHTML = ''; // Clears the container
