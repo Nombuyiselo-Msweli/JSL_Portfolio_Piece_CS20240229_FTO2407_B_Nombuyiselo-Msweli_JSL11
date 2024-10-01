@@ -111,7 +111,7 @@ function filterAndDisplayTasksByBoard(boardName) {
 
       // Listen for a click event on each task and open a modal
       taskElement.addEventListener('click', function() { 
-        openEditTaskModal(task);
+        openEditTaskModal(tasks);
       });
 
       tasksContainer.appendChild(taskElement);
