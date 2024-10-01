@@ -32,16 +32,22 @@ const elements = {
 let activeBoard = ""
 
 // Extracts unique board names from tasks
-// TASK: FIX BUGS
+// TASK: FIX BUGS ====DONE===
 function fetchAndDisplayBoardsAndTasks() {
   const tasks = getTasks();
+
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
   displayBoards(boards);
+
   if (boards.length > 0) {
-    const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
+    const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"));
+
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
+
     elements.headerBoardName.textContent = activeBoard
+
     styleActiveBoard(activeBoard)
+
     refreshTasksUI();
   }
 }
@@ -55,7 +61,7 @@ function displayBoards(boards) {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.click()  { 
+    boardElement.addEventListener('click', function() { 
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
