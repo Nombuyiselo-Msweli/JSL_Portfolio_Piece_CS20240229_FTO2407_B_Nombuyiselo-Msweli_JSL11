@@ -89,7 +89,7 @@ function displayBoards(boards) {
 // TASK: Fix Bugs === DONE ===
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
-  const filteredTasks = tasks.filter(task => task.board = boardName);
+  const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
@@ -143,6 +143,7 @@ function styleActiveBoard(boardName) {
 }
 
 
+//==== SOMETHING HERE IS NOT ALLOWING ME TO ADD TASKS TO THE TODO CONTAINER =====!!!!!
 function addTaskToUI(task) {
   const column = document.querySelector(`.column-div[data-status="${task.status}"]`); 
   if (!column) {
@@ -160,7 +161,7 @@ function addTaskToUI(task) {
 
   const taskElement = document.createElement('div');
   taskElement.className = 'task-div';
-  taskElement.innerHTML = `<h1> ${task.title} </h1>`; // Modify as needed
+  taskElement.innerHTML = task.title; // Modify as needed
   taskElement.setAttribute('data-task-id', task.id);
   
   tasksContainer.appendChild(taskElement); 
@@ -298,7 +299,7 @@ function openEditTaskModal(task) {
 
 
   // Call saveTaskChanges upon click of Save Changes button
- 
+  //elements.saveChangesBtn.addEventListener('click', saveTasks); 
 
   // Delete task using a helper function and close the task modal
 
