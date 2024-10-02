@@ -30,7 +30,7 @@ const elements = {
       editTaskModal: document.querySelector('.edit-task-modal-window'),
       filterDiv : document.getElementById('filterDiv'),
       hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
-      showSideBarBtn: document.getElementById('show-side-bar-btn') , 
+      showSideBarBtn: document.getElementById("show-side-bar-btn") , 
       themeSwitch: document.getElementById('switch') ,
       createNewTaskBtn: document.getElementById('add-new-task-btn'),
       columnDivs: document.querySelectorAll('.column-div'),
@@ -115,8 +115,8 @@ function filterAndDisplayTasksByBoard(boardName) {
 
     // Listen for a click event on each task and open a modal
     taskElement.addEventListener('click', function() {
-
       openEditTaskModal(tasks);
+
     });
 
       tasksContainer.appendChild(taskElement);
@@ -129,7 +129,9 @@ function refreshTasksUI() {
 }
 
 // Styles the active board by adding an active class
-// TASK: Fix Bugs ==== DONE ====
+// TASK: Fix Bugs 
+
+//==== ACTIVE BOARD NOT CHANGING COLOUR TO TAKE ON ACTIVE CLASS, CAN'T FIND .board-btn class anywhere
 function styleActiveBoard(boardName) {
   document.querySelectorAll('.board-btn').forEach(btn => { 
     
@@ -251,15 +253,16 @@ function addTask(event) {
 
 function toggleSidebar(show) {
   const sidebar = document.getElementById('side-bar-div');
+  elements.showSideBarBtn.display = "block";
 
   if (show) {
     // Show the sidebar
     sidebar.style.display = 'block';  
-    sidebar.classList.add('visible'); 
+    sidebar.classList.add('visible');  
   } else {
     // Hide the sidebar
     sidebar.style.display = 'none';  
-    sidebar.classList.remove('visible'); 
+    sidebar.classList.remove('visible');
   }
 
 }
