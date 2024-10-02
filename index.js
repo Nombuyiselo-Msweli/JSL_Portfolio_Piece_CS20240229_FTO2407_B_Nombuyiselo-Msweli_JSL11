@@ -270,9 +270,16 @@ function toggleTheme() {
  body.classList.toggle('light-theme');
 
  // store the current theme in local storage to remember the user's preference
- const theme = body.classList.contains('light-theme') ? 'light' : 'dark';
+ const theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
  localStorage.setItem('theme', theme);
- 
+
+ // Check local storage for saved theme on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light-theme') {
+    document.body.classList.add('light-theme');
+  }
+});
 }
 
 elements.themeSwitch.addEventListener('change', toggleTheme);
