@@ -198,7 +198,8 @@ function setupEventListeners() {
 
   // Add new task form submission event listener
   elements.modalWindow.addEventListener('submit',  (event) => {
-    addTask(event)
+    event.preventDefault(); //prevents form from submitting normally
+    addTask(event);
   });
 }
 
