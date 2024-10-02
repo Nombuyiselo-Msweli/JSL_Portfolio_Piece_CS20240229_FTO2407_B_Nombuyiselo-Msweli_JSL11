@@ -229,8 +229,11 @@ function addTask(event) {
 
   //--then I add the user input values as items in the task object
     const task = {
-      
+      title : taskTitle ,
+      description: taskDescription,
+      status: taskStatus
     };
+    
     const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
