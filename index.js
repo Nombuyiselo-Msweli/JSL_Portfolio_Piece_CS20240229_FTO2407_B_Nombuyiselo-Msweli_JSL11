@@ -233,7 +233,7 @@ function addTask(event) {
       description: taskDescription,
       status: taskStatus
     };
-    
+
     const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
@@ -246,8 +246,23 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+  const sidebar = document.getElementById('side-bar-div');
+
+
+  if (show) {
+    // Show the sidebar
+    sidebar.style.display = 'block';  
+    sidebar.classList.add('visible'); 
+  } else {
+    // Hide the sidebar
+    sidebar.style.display = 'none';  
+    sidebar.classList.remove('visible'); 
+  }
 }
+
+elements.hideSideBarBtn.addEventListener('click', () => toggleSidebar(false));
+elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
+
 
 function toggleTheme() {
  
