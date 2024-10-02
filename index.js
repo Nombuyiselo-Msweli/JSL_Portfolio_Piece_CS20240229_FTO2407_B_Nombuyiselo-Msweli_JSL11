@@ -248,7 +248,6 @@ function addTask(event) {
 function toggleSidebar(show) {
   const sidebar = document.getElementById('side-bar-div');
 
-
   if (show) {
     // Show the sidebar
     sidebar.style.display = 'block';  
@@ -265,8 +264,18 @@ elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
 
 
 function toggleTheme() {
+ const body = document.body ; 
+
+ // Toggle a class like 'dark-theme' on the body to switch between themes
+ body.classList.toggle('light-theme');
+
+ // store the current theme in local storage to remember the user's preference
+ const theme = body.classList.contains('light-theme') ? 'light' : 'dark';
+ localStorage.setItem('theme', theme);
  
 }
+
+elements.themeSwitch.addEventListener('change', toggleTheme);
 
 
 
