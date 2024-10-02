@@ -34,11 +34,12 @@ const elements = {
       themeSwitch: document.getElementById('switch') ,
       createNewTaskBtn: document.getElementById('add-new-task-btn'),
       columnDivs: document.querySelectorAll('.column-div'),
-      modalWindow: document.getElementById('new-task-modal-window')
+      modalWindow: document.getElementById('new-task-modal-window'),
+      saveChangesBtn: document.getElementById('save-task-changes-btn')
 }
 // NOTE FOR MYSELF: using elements.variablename to see what to add to the elements object and ensure they are initialised.
 
-let activeBoard = ""
+let activeBoard = "" 
 
 // Extracts unique board names from tasks
 // TASK: FIX BUGS ====DONE===
@@ -242,6 +243,8 @@ function addTask(event) {
       event.target.reset();
       refreshTasksUI();
     }
+
+    //===== NEED TO ADD CODE SO THE TASK I'VE ADDED DOESN'T DISSAPEAR AFTER REFRESH ====
 }
 
 
@@ -257,12 +260,13 @@ function toggleSidebar(show) {
     sidebar.style.display = 'none';  
     sidebar.classList.remove('visible'); 
   }
+
 }
 
 elements.hideSideBarBtn.addEventListener('click', () => toggleSidebar(false));
 elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
 
-
+//===== COME BACK AND MAKE SURE TOGGLED THEME STAYS EVEN AFTER REFRESHING =====
 function toggleTheme() {
  const body = document.body ; 
 
