@@ -1,13 +1,13 @@
 // TASK: import helper functions from utils
-import {getTasks} from "utils/taskFunction.js" ;
-import {saveTasks} from "utils/taskFunction.js" ;
-import {createNewTask} from "utils/taskFunction.js" ;
-import {patchTask} from "utils/taskFunction.js" ;
-import {putTask} from "utils/taskFunction.js" ;
-import {deleteTask} from "utils/taskFunction.js" ;
+import {getTasks} from "./taskFunctions.js" ;
+import {saveTasks} from "./taskFunctions.js" ;
+import {createNewTask} from "./taskFunctions.js" ;
+import {patchTask} from "./taskFunctions.js" ;
+import {putTask} from "./taskFunctions.js" ;
+import {deleteTask} from "./taskFunctions.js" ;
 
 // TASK: import initialData
-import {initialData} from "initialData.js" ;
+import {initialData} from "./initialData.js" ;
 
 
 /*************************************************************************************************************************************************
@@ -265,7 +265,7 @@ function saveTaskChanges(taskId) {
   // Create an object with the updated task details
 
 
-  // Update task using a hlper functoin
+  // Update task using a helper function
  
 
   // Close the modal and refresh the UI to reflect the changes
