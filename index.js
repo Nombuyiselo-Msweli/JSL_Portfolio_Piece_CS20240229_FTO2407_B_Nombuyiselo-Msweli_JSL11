@@ -24,6 +24,7 @@ function initializeData() {
   }
 }
 
+
 // TASK: Get elements from the DOM
 const elements = {
       headerBoardName : document.getElementById('header-board-name'),
@@ -206,7 +207,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' => 'none'; 
+  modal.style.display = show ? 'block' : 'none'; 
 }
 
 /*************************************************************************************************************************************************
