@@ -22,8 +22,7 @@ function initializeData() {
   } else {
     console.log('Data already exists in localStorage');
   }
-}
-
+} 
 
 // TASK: Get elements from the DOM
 const elements = {
@@ -34,7 +33,8 @@ const elements = {
       showSideBarBtn: document.getElementById('show-side-bar-btn') , 
       themeSwitch: document.getElementById('switch') ,
       createNewTaskBtn: document.getElementById('add-new-task-btn'),
-      columnDivs: document.querySelectorAll('.column-div')
+      columnDivs: document.querySelectorAll('.column-div'),
+      modalWindow: document.getElementById('new-task-modal-window')
 }
 // NOTE FOR MYSELF: using elements.variablename to see what to add to the elements object and ensure they are initialised.
 
@@ -103,17 +103,20 @@ function filterAndDisplayTasksByBoard(boardName) {
     const tasksContainer = document.createElement("div");
     column.appendChild(tasksContainer);
 
-    filteredTasks.filter(task => task.status = status).forEach(task => { 
+    filteredTasks.filter(task => task.status === status).forEach(task => { 
+
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
-      taskElement.textContent = task.title;
+      taskElement.innerHTML = `<h1> ${task.title} </h1>`;
       taskElement.setAttribute('data-task-id', task.id);
-      });
 
-      // Listen for a click event on each task and open a modal
-      taskElement.addEventListener('click', function() { 
-        openEditTaskModal(tasks);
-      });
+    });
+
+    // Listen for a click event on each task and open a modal
+    taskElement.addEventListener('click', function() {
+
+      openEditTaskModal(tasks);
+    });
 
       tasksContainer.appendChild(taskElement);
   });
@@ -156,7 +159,7 @@ function addTaskToUI(task) {
 
   const taskElement = document.createElement('div');
   taskElement.className = 'task-div';
-  taskElement.textContent = task.title; // Modify as needed
+  taskElement.innerHTML = `<h1> ${task.title} </h1>`; // Modify as needed
   taskElement.setAttribute('data-task-id', task.id);
   
   tasksContainer.appendChild(taskElement); 
