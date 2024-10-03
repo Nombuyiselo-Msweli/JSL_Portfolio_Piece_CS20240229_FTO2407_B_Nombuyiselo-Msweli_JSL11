@@ -87,12 +87,14 @@ function displayBoards(boards) {
 }
 
 // Filters tasks corresponding to the board name and displays them on the DOM.
-// TASK: Fix Bugs === DONE ===
+// TASK: Fix Bugs 
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
   const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
+
+
 
   elements.columnDivs.forEach(column => {
     const status = column.getAttribute("data-status");
@@ -109,7 +111,7 @@ function filterAndDisplayTasksByBoard(boardName) {
 
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
-      taskElement.innerHTML = `<h1> ${task.title} </h1>`;
+      taskElement.innerHTML = task.title;
       taskElement.setAttribute('data-task-id', task.id);
 
     });
@@ -117,7 +119,6 @@ function filterAndDisplayTasksByBoard(boardName) {
     // Listen for a click event on each task and open a modal
     taskElement.addEventListener('click', function() {
       openEditTaskModal(tasks);
-
     });
 
       tasksContainer.appendChild(taskElement);
@@ -319,9 +320,16 @@ function openEditTaskModal(task) {
   elements.saveChangesBtn.addEventListener('click', saveTasks);  //can't remeber why I did this twice, must come back and double check
   
   // Delete task using a helper function and close the task modal
+  deleteTaskBtn.addEventListener('click', () => {
+    deleteTask(task.id); // Helper function to delete the task
+    toggleModal(false, elements.editTaskModal); // Close modal after deleting
+    refreshTasksUI(); // Refresh the UI after deleting the task
+  });
 
-
-  
+  //function to cancel edit
+  cancelEditBtn.addEventListener('click', () => {
+    toggleModal(false, elements.editTaskModal);
+  });
 }
 
 function saveTaskChanges(taskId) {
