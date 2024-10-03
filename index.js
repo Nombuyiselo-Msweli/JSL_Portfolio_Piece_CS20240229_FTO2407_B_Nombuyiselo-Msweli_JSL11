@@ -308,14 +308,20 @@ function openEditTaskModal(task) {
   const cancelEditBtn = document.getElementById("cancel-edit-btn");
   const deleteTaskBtn = document.getElementById("delete-task-btn");
 
+  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+
   // Call saveTaskChanges upon click of Save Changes button
+  saveChangesBtn.addEventListener('click', () => {
+    saveTaskChanges(task.id);
+    toggleModal(false, elements.editTaskModal); // to close modal after saving
+  });
 
   //elements.saveChangesBtn.addEventListener('click', saveTasks); 
 
   // Delete task using a helper function and close the task modal
 
 
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+  
 }
 
 function saveTaskChanges(taskId) {
