@@ -316,8 +316,8 @@ function openEditTaskModal(task) {
     toggleModal(false, elements.editTaskModal); // to close modal after saving
   });
 
-  //elements.saveChangesBtn.addEventListener('click', saveTasks); 
-
+  elements.saveChangesBtn.addEventListener('click', saveTasks);  //can't remeber why I did this twice, must come back and double check
+  
   // Delete task using a helper function and close the task modal
 
 
