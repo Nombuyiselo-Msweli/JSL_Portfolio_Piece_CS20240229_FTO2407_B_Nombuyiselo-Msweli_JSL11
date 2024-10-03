@@ -300,9 +300,9 @@ elements.themeSwitch.addEventListener('change', toggleTheme);
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  document.getElementById("edit-task-title-input").value = editedTaskTitle;
-  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
-  document.getElementById("edit-select-status").value = editedTaskStatus; 
+  // document.getElementById("edit-task-title-input").value = editedTaskTitle;
+  // document.getElementById("edit-task-desc-input").value = editedTaskDescription;
+  // document.getElementById("edit-select-status").value = editedTaskStatus; 
 
   // Get button elements from the task modal
   const saveChangesBtn = document.getElementById("save-task-changes-btn");
@@ -347,7 +347,6 @@ function saveTaskChanges(taskId) {
     tasks[taskIndex].title = editedTaskTitle;
     tasks[taskIndex].description = editedTaskDescription;
     tasks[taskIndex].status = editedTaskStatus;
-  }
 
   // Update task using a helper function
   saveTasks(tasks);
@@ -356,6 +355,7 @@ function saveTaskChanges(taskId) {
   toggleModal(false, elements.editTaskModal);
 
   refreshTasksUI();
+  }
 }
 
 /*************************************************************************************************************************************************/
