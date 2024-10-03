@@ -1,5 +1,5 @@
 // TASK: import helper functions from utils
-import {getTasks} from "./utils/taskFunctions.js" ;
+import {getTasks} from "../utils/taskFunctions.js" ;
 import {saveTasks} from "./utils/taskFunctions.js" ;
 import {createNewTask} from "./utils/taskFunctions.js" ;
 import {patchTask} from "./utils/taskFunctions.js" ;
@@ -47,15 +47,6 @@ let activeBoard = ""
 function fetchAndDisplayBoardsAndTasks() {
 
   const tasks = getTasks();
-
-  // if (!Array.isArray(tasks)) {
-  // tasks = []; // Fallback to an empty array if tasks is not valid
-  //  }
-
-  // if (tasks.length === 0) {
-  //   console.warn('No tasks available');
-  //   return; // Exit early if no tasks exist
-  // }
 
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
 
@@ -114,7 +105,7 @@ function filterAndDisplayTasksByBoard(boardName) {
                         </div>`;
 
     const tasksContainer = document.createElement("div");
-    tasksContainer.classList.add('tasks-container'); // Adding the class for styling
+    //tasksContainer.classList.add('tasks-container'); // Adding the class for styling
     column.appendChild(tasksContainer);
 
     filteredTasks.filter(task => task.status === status).forEach(task => { 
@@ -309,53 +300,64 @@ elements.themeSwitch.addEventListener('change', toggleTheme);
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  document.getElementById("edit-task-title-input").value = editedTaskTitle;
-  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
-  document.getElementById("edit-select-status").value = editedTaskStatus; 
+  // document.getElementById("edit-task-title-input").value = editedTaskTitle;
+  // document.getElementById("edit-task-desc-input").value = editedTaskDescription;
+  // document.getElementById("edit-select-status").value = editedTaskStatus; 
 
   // Get button elements from the task modal
-  const saveChangesBtn = document.getElementById("save-task-changes-btn");
-  const cancelEditBtn = document.getElementById("cancel-edit-btn");
-  const deleteTaskBtn = document.getElementById("delete-task-btn");
+  // const saveChangesBtn = document.getElementById("save-task-changes-btn");
+  // const cancelEditBtn = document.getElementById("cancel-edit-btn");
+  // const deleteTaskBtn = document.getElementById("delete-task-btn");
 
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+ // toggleModal(true, elements.editTaskModal); // Show the edit task modal
 
   // Call saveTaskChanges upon click of Save Changes button
-  saveChangesBtn.addEventListener('click', () => {
-    saveTaskChanges(task.id);
-    toggleModal(false, elements.editTaskModal); // to close modal after saving
-  });
+  // saveChangesBtn.addEventListener('click', () => {
+  //   saveTaskChanges(task.id);
+  //   toggleModal(false, elements.editTaskModal); // to close modal after saving
+  // });
 
-  elements.saveChangesBtn.addEventListener('click', saveTasks);  //can't remeber why I did this twice, must come back and double check
+  //elements.saveChangesBtn.addEventListener('click', saveTasks);  //can't remeber why I did this twice, must come back and double check
   
   // Delete task using a helper function and close the task modal
-  deleteTaskBtn.addEventListener('click', () => {
-    deleteTask(task.id); // Helper function to delete the task
-    toggleModal(false, elements.editTaskModal); // Close modal after deleting
-    refreshTasksUI(); // Refresh the UI after deleting the task
-  });
+  // deleteTaskBtn.addEventListener('click', () => {
+  //   deleteTask(task.id); // Helper function to delete the task
+  //   toggleModal(false, elements.editTaskModal); // Close modal after deleting
+  //   refreshTasksUI(); // Refresh the UI after deleting the task
+  // });
 
   //function to cancel edit
-  cancelEditBtn.addEventListener('click', () => {
-    toggleModal(false, elements.editTaskModal);
-  });
+//   cancelEditBtn.addEventListener('click', () => {
+//     toggleModal(false, elements.editTaskModal);
+//   });
 }
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  document.getElementById("edit-task-title-input").value = editedTaskTitle;
-  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
-  document.getElementById("edit-select-status").value = editedTaskStatus; 
+  // document.getElementById("edit-task-title-input").value = editedTaskTitle;
+  // document.getElementById("edit-task-desc-input").value = editedTaskDescription;
+  // document.getElementById("edit-select-status").value = editedTaskStatus; 
 
-  //getting tasks array from local storage 
-  const tasks = getTasks();
+  // //getting tasks array from local storage 
+  // //const tasks = getTasks();
 
-  // Create an object with the updated task details, we're finding the task by id then updating it's properties
-  const taskIndex = tasks.findIndex(task => task.id === taskId);
-  if (taskIndex > -1) {
-    tasks[taskIndex].title = editedTaskTitle;
-    tasks[taskIndex].description = editedTaskDescription;
-    tasks[taskIndex].status = editedTaskStatus;
+  // localStorage.setItem("tasks", JSON.stringify(tasks))
+  // localStorage.getItem("tasks")
+
+  // Create an object with the updated task details
+  // const newUserdata = {
+  //   updatedTaskTitle : 'editedTaskTitle',
+  //   updatedDescription : 'editedTaskDescription',
+  //   updatedStatus : 'editedTaskStatus'
+  // }
+
+  //we're finding the task by id then updating it's properties
+  //const taskIndex = tasks.findIndex(task => task.id === taskId);
+  // if (taskIndex > -1) {
+  //   tasks[taskIndex].title = editedTaskTitle;
+  //   tasks[taskIndex].description = editedTaskDescription;
+  //   tasks[taskIndex].status = editedTaskStatus;
+  // }
 
   // Update task using a helper function
   saveTasks(tasks);
@@ -364,8 +366,6 @@ function saveTaskChanges(taskId) {
   toggleModal(false, elements.editTaskModal);
 
   refreshTasksUI();
-  
-}
 }
 
 /*************************************************************************************************************************************************/
