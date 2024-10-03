@@ -105,23 +105,23 @@ function filterAndDisplayTasksByBoard(boardName) {
                         </div>`;
 
     const tasksContainer = document.createElement("div");
+    tasksContainer.classList.add('tasks-container'); // Adding the class for styling
     column.appendChild(tasksContainer);
 
     filteredTasks.filter(task => task.status === status).forEach(task => { 
 
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
-      taskElement.innerHTML = task.title;
+      taskElement.innerHTML = `<p>${task.title}</p>`;
       taskElement.setAttribute('data-task-id', task.id);
 
-    });
-
-    // Listen for a click event on each task and open a modal
-    taskElement.addEventListener('click', function() {
-      openEditTaskModal(tasks);
-    });
+      // Listen for a click event on each task and open a modal
+      taskElement.addEventListener('click', function() {
+        openEditTaskModal(tasks);
+      });
 
       tasksContainer.appendChild(taskElement);
+    });
   });
 }
 
@@ -165,7 +165,7 @@ function addTaskToUI(task) {
 
   const taskElement = document.createElement('div');
   taskElement.className = 'task-div';
-  taskElement.innerHTML = task.title; // Modify as needed
+  taskElement.innerHTML = `<p>${task.title}</p>`;
   taskElement.setAttribute('data-task-id', task.id);
   
   tasksContainer.appendChild(taskElement); 
