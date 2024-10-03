@@ -7,7 +7,7 @@ import {putTask} from "./utils/taskFunctions.js" ;
 import {deleteTask} from "./utils/taskFunctions.js" ;
 
 // TASK: import initialData
-import {initialData} from "./initialData.js" ;
+import {initialData} from "./initialData.js";
 
 
 /*************************************************************************************************************************************************
@@ -23,6 +23,7 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 } 
+initializeData(); 
 
 // TASK: Get elements from the DOM
 const elements = {
@@ -252,8 +253,9 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
-  const sidebar = document.getElementById('side-bar-div');
-  elements.showSideBarBtn.display = "block";
+  
+  const sidebar = document.getElementById('side-bar-div'); 
+  
 
   if (show) {
     // Show the sidebar
@@ -263,6 +265,7 @@ function toggleSidebar(show) {
     // Hide the sidebar
     sidebar.style.display = 'none';  
     sidebar.classList.remove('visible');
+    elements.showSideBarBtn.style.display = "block";
   }
 
 }
