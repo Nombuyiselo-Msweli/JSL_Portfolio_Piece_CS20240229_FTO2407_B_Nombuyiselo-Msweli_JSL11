@@ -341,8 +341,13 @@ function saveTaskChanges(taskId) {
   //getting tasks array from local storage 
   const tasks = getTasks();
 
-  // Create an object with the updated task details
-
+  // Create an object with the updated task details, we're finding the task by id then updating it's properties
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  if (taskIndex > -1) {
+    tasks[taskIndex].title = editedTaskTitle;
+    tasks[taskIndex].description = editedTaskDescription;
+    tasks[taskIndex].status = editedTaskStatus;
+  }
 
   // Update task using a helper function
  
