@@ -144,13 +144,11 @@ function refreshTasksUI() {
 
 //==== ACTIVE BOARD NOT CHANGING COLOUR TO TAKE ON ACTIVE CLASS, CAN'T FIND .board-btn class anywhere
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').forEach(btn => { 
-    
-    if(btn.textContent === boardName) {
-      btn.classList.add('active') 
-    }
-    else {
-      btn.classList.remove('active'); 
+  document.querySelectorAll('.board-btn').forEach(btn => {
+    if (btn.textContent.trim() === boardName) { // Ensure no extra spaces
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
     }
   });
 }
@@ -158,7 +156,7 @@ function styleActiveBoard(boardName) {
 
 //==== SOMETHING HERE IS NOT ALLOWING ME TO ADD TASKS TO THE TODO CONTAINER =====!!!!!
 function addTaskToUI(task) {
-  const column = document.querySelector(`.column-div[data-status="${task.status}"]`); 
+  const column = document.querySelector(`.column-div[data-status="${task.status}"]`);
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
     return;
@@ -176,8 +174,8 @@ function addTaskToUI(task) {
   taskElement.className = 'task-div';
   taskElement.innerHTML = `<p>${task.title}</p>`;
   taskElement.setAttribute('data-task-id', task.id);
-  
-  tasksContainer.appendChild(taskElement); 
+
+  tasksContainer.appendChild(taskElement);
 }
 
 
@@ -235,32 +233,30 @@ function toggleModal(show, modal = elements.modalWindow) {
 function addTask(event) {
   event.preventDefault(); 
 
-  //Assign user input to the task object
+  const taskTitle = document.getElementById('title-input').value;
+  const taskDescription = document.getElementById('desc-input').value; 
+  const taskStatus = document.getElementById('select-status').value;
 
-  //--Start by getting User input:
-    const taskTitle = document.getElementById('title-input').value ;
-    const taskDescription = document.getElementById('desc-input').value; 
-    const taskStatus = document.getElementById('select-status').value;
+  const task = {
+    title: taskTitle,
+    description: taskDescription,
+    status: taskStatus,
+    id: Date.now() // Generate a unique ID based on timestamp
+  };
 
-  //--then I add the user input values as items in the task object
-    const task = {
-      title : taskTitle ,
-      description: taskDescription,
-      status: taskStatus
-    };
+  const newTask = createNewTask(task); // This likely updates tasks in memory
+  if (newTask) {
+    const tasks = getTasks(); // Get current tasks
+    tasks.push(newTask); // Add the new task to the array
+    saveTasks(tasks); // Save to localStorage to persist it
 
-    const newTask = createNewTask(task);
-    if (newTask) {
-      addTaskToUI(newTask);
-      toggleModal(false);
-      elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-      event.target.reset();
-      refreshTasksUI();
-    }
-
-    //===== NEED TO ADD CODE SO THE TASK I'VE ADDED DOESN'T DISSAPEAR AFTER REFRESH ====
+    addTaskToUI(newTask); // Update the UI
+    toggleModal(false);
+    elements.filterDiv.style.display = 'none';
+    event.target.reset();
+    refreshTasksUI(); // Refresh the UI after adding the task
+  }
 }
-
 
 function toggleSidebar(show) {
   
@@ -285,59 +281,49 @@ elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
 
 //===== COME BACK AND MAKE SURE TOGGLED THEME STAYS EVEN AFTER REFRESHING =====
 function toggleTheme() {
- const body = document.body ; 
+  const body = document.body;
+  body.classList.toggle('light-theme');
 
- // Toggle a class like 'dark-theme' on the body to switch between themes
- body.classList.toggle('light-theme');
+  const theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
+  localStorage.setItem('theme', theme);
+}
 
- // store the current theme in local storage to remember the user's preference
- const theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
- localStorage.setItem('theme', theme);
-
- // Check local storage for saved theme on page load
 document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light-theme') {
     document.body.classList.add('light-theme');
+  } else {
+    document.body.classList.remove('light-theme');
   }
 });
-}
 
 elements.themeSwitch.addEventListener('change', toggleTheme);
 
 
 
 function openEditTaskModal(task) {
-  // Set task details in modal inputs
-  document.getElementById("edit-task-title-input").value = editedTaskTitle;
-  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
-  document.getElementById("edit-select-status").value = editedTaskStatus; 
+  document.getElementById("edit-task-title-input").value = task.title;
+  document.getElementById("edit-task-desc-input").value = task.description;
+  document.getElementById("edit-select-status").value = task.status;
 
-  // Get button elements from the task modal
   const saveChangesBtn = document.getElementById("save-task-changes-btn");
-  const cancelEditBtn = document.getElementById("cancel-edit-btn");
   const deleteTaskBtn = document.getElementById("delete-task-btn");
 
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+  toggleModal(true, elements.editTaskModal);
 
-  // Call saveTaskChanges upon click of Save Changes button
-  saveChangesBtn.addEventListener('click', () => {
+  // Remove any previous event listeners before attaching new ones
+  saveChangesBtn.replaceWith(saveChangesBtn.cloneNode(true));
+  deleteTaskBtn.replaceWith(deleteTaskBtn.cloneNode(true));
+
+  document.getElementById("save-task-changes-btn").addEventListener('click', () => {
     saveTaskChanges(task.id);
-    toggleModal(false, elements.editTaskModal); // to close modal after saving
-  });
-
-  elements.saveChangesBtn.addEventListener('click', saveTasks);  //can't remeber why I did this twice, must come back and double check
-  
-  // Delete task using a helper function and close the task modal
-  deleteTaskBtn.addEventListener('click', () => {
-    deleteTask(task.id); // Helper function to delete the task
-    toggleModal(false, elements.editTaskModal); // Close modal after deleting
-    refreshTasksUI(); // Refresh the UI after deleting the task
-  });
-
-  //function to cancel edit
-  cancelEditBtn.addEventListener('click', () => {
     toggleModal(false, elements.editTaskModal);
+  });
+
+  document.getElementById("delete-task-btn").addEventListener('click', () => {
+    deleteTask(task.id);
+    toggleModal(false, elements.editTaskModal);
+    refreshTasksUI();
   });
 }
 
