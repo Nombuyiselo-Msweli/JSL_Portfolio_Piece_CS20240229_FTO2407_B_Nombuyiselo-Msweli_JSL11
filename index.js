@@ -303,11 +303,13 @@ function openEditTaskModal(task) {
   document.getElementById("edit-task-desc-input").value = editedTaskDescription;
   document.getElementById("edit-select-status").value = editedTaskStatus; 
 
-
   // Get button elements from the task modal
-
+  const saveChangesBtn = document.getElementById("save-task-changes-btn");
+  const cancelEditBtn = document.getElementById("cancel-edit-btn");
+  const deleteTaskBtn = document.getElementById("delete-task-btn");
 
   // Call saveTaskChanges upon click of Save Changes button
+
   //elements.saveChangesBtn.addEventListener('click', saveTasks); 
 
   // Delete task using a helper function and close the task modal
