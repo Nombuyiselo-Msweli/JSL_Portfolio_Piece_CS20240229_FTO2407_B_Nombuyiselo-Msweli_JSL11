@@ -45,9 +45,20 @@ let activeBoard = ""
 // Extracts unique board names from tasks
 // TASK: FIX BUGS ====DONE===
 function fetchAndDisplayBoardsAndTasks() {
+
   const tasks = getTasks();
 
+  // if (!Array.isArray(tasks)) {
+  // tasks = []; // Fallback to an empty array if tasks is not valid
+  //  }
+
+  // if (tasks.length === 0) {
+  //   console.warn('No tasks available');
+  //   return; // Exit early if no tasks exist
+  // }
+
   const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
+
   displayBoards(boards);
 
   if (boards.length > 0) {
@@ -77,8 +88,8 @@ function displayBoards(boards) {
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
-      localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
-      styleActiveBoard(activeBoard)
+      localStorage.setItem("activeBoard", JSON.stringify(activeBoard)) ;
+      styleActiveBoard(activeBoard) ;
     });
 
     boardsContainer.appendChild(boardElement);
@@ -93,8 +104,6 @@ function filterAndDisplayTasksByBoard(boardName) {
   const filteredTasks = tasks.filter(task => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
-
-
 
   elements.columnDivs.forEach(column => {
     const status = column.getAttribute("data-status");
@@ -119,7 +128,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       taskElement.addEventListener('click', function() {
         openEditTaskModal(tasks);
       });
-
+      
       tasksContainer.appendChild(taskElement);
     });
   });
@@ -300,9 +309,9 @@ elements.themeSwitch.addEventListener('change', toggleTheme);
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  // document.getElementById("edit-task-title-input").value = editedTaskTitle;
-  // document.getElementById("edit-task-desc-input").value = editedTaskDescription;
-  // document.getElementById("edit-select-status").value = editedTaskStatus; 
+  document.getElementById("edit-task-title-input").value = editedTaskTitle;
+  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
+  document.getElementById("edit-select-status").value = editedTaskStatus; 
 
   // Get button elements from the task modal
   const saveChangesBtn = document.getElementById("save-task-changes-btn");
@@ -355,7 +364,8 @@ function saveTaskChanges(taskId) {
   toggleModal(false, elements.editTaskModal);
 
   refreshTasksUI();
-  }
+  
+}
 }
 
 /*************************************************************************************************************************************************/
