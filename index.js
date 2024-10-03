@@ -1,3 +1,4 @@
+//I'm going to make another attempt at this project in a different folder from scratch
 // TASK: import helper functions from utils
 import {getTasks} from "../utils/taskFunctions.js" ;
 import {saveTasks} from "./utils/taskFunctions.js" ;
