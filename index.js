@@ -350,9 +350,10 @@ function saveTaskChanges(taskId) {
   }
 
   // Update task using a helper function
- 
+  saveTasks(tasks);
 
   // Close the modal and refresh the UI to reflect the changes
+
 
   refreshTasksUI();
 }
