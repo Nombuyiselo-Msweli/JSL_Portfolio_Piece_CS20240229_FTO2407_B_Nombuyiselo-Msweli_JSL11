@@ -299,7 +299,10 @@ elements.themeSwitch.addEventListener('change', toggleTheme);
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  
+  document.getElementById("edit-task-title-input").value = editedTaskTitle;
+  document.getElementById("edit-task-desc-input").value = editedTaskDescription;
+  document.getElementById("edit-select-status").value = editedTaskStatus; 
+
 
   // Get button elements from the task modal
 
