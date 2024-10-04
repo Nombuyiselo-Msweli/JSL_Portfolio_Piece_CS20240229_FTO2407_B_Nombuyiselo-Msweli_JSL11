@@ -254,7 +254,15 @@ function initializeData() {
 
   function openEditTaskModal(task) {
     // Set task details in modal inputs
-    
+    updatedTask = document.getElementById('edit-task-title-input').value;
+    updatedDescription = document.getElementById('edit-task-desc-input').value;
+    updatedStatus = document.getElementById('edit-select-status').value;
+
+    const newDeatils = {
+      newTask: updatedTask , 
+      newDescription : updatedDescription,
+      newStatus : updatedStatus
+    }
 
     toggleModal(true, elements.editTaskModal); // Show the edit task modal
     // Get button elements from the task modal
