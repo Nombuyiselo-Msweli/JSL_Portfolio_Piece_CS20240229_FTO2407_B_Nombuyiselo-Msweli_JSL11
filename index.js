@@ -75,16 +75,15 @@ function initializeData() {
         localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
         styleActiveBoard(activeBoard)
 
-        boardsContainer.appendChild(boardElement);
       });
+
+      boardsContainer.appendChild(boardElement);
       
     });
   }
   // Filters tasks corresponding to the board name and displays them on the DOM.
 
   // TASK: Fix Bugs
-
-  
 
 
   function filterAndDisplayTasksByBoard(boardName) {
@@ -208,7 +207,6 @@ function initializeData() {
         taskDescription: elements.taskDescription , 
         tastStatus: elements.taskStatus,
       };
-
 
       const newTask = createNewTask(task);
       if (newTask) {
